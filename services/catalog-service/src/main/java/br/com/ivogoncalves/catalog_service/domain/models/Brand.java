@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.Instant;
+import java.util.Optional;
 
 /**
  * @author Ivo Gonçalves
@@ -19,16 +20,16 @@ public class Brand {
     @Getter
     private Slug slug;
     @Getter
-    private String description;
+    private Optional<String> description;
     @Getter
-    private String logoUrl;
+    private Optional<String> logoUrl;
     private boolean active;
     @Getter
     private final Instant createdAt;
     @Getter
     private Instant updatedAt;
 
-    private Brand(String name, String description, String logoUrl) {
+    private Brand(String name, Optional<String> description, Optional<String> logoUrl) {
         this.id = new BrandId();
         setName(name);
         this.description = description;
@@ -38,7 +39,7 @@ public class Brand {
         this.updatedAt = null;
     }
 
-    public static Brand create(String name, String description, String logoUrl) {
+    public static Brand create(String name, Optional<String> description, Optional<String> logoUrl) {
         return new Brand(name, description, logoUrl);
     }
 
@@ -47,12 +48,12 @@ public class Brand {
         setUpdatedAt();
     }
 
-    public void updateDescription(String newDescription) {
+    public void updateDescription(Optional<String> newDescription) {
         this.description = newDescription;
         setUpdatedAt();
     }
 
-    public void updateLogo(String logoUrl) {
+    public void updateLogo(Optional<String> logoUrl) {
         this.logoUrl = logoUrl;
         setUpdatedAt();
     }
