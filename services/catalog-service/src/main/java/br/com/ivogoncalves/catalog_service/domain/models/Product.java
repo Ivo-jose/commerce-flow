@@ -125,14 +125,14 @@ public class Product {
     }
 
     public void activate() {
-        if (this.status ==  ProductStatus.ACTIVE)
+        if (this.status == ProductStatus.ACTIVE)
             throw new IllegalArgumentException("The product is already active.");
         this.status = ProductStatus.ACTIVE;
         setUpdatedAt();
     }
 
     public void deactivate() {
-        if (this.status ==  ProductStatus.INACTIVE)
+        if (this.status == ProductStatus.INACTIVE)
             throw new IllegalArgumentException("The product is already inactive.");
         this.status = ProductStatus.INACTIVE;
         setUpdatedAt();
@@ -165,7 +165,7 @@ public class Product {
     public void updateImageOrder(ProductImageId imageId, Integer newOrder) {
         if (imageId == null)
             throw new IllegalArgumentException("The provided image ID cannot be null.");
-        var image =  this.images.stream().filter(img -> img.getId().equals(imageId)).findFirst().orElseThrow(
+        var image = this.images.stream().filter(img -> img.getId().equals(imageId)).findFirst().orElseThrow(
                 () -> new ResourceNotFoundException("There aren't records for this id."));
         image.updateOrder(newOrder);
         setUpdatedAt();
