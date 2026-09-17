@@ -2,6 +2,7 @@ package br.com.ivogoncalves.catalog_service.domain.models;
 
 import br.com.ivogoncalves.catalog_service.domain.enums.ProductStatus;
 import br.com.ivogoncalves.catalog_service.domain.exceptions.InvalidSkuException;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.ProductImageLimitExceededException;
 import br.com.ivogoncalves.catalog_service.domain.exceptions.ResourceNotFoundException;
 import com.github.f4b6a3.uuid.UuidCreator;
 import lombok.EqualsAndHashCode;
@@ -175,7 +176,7 @@ public class Product {
         if (image == null)
             throw new IllegalArgumentException("The product image cannot be null.");
         if (this.images.size() >= 4)
-            throw new IllegalArgumentException("The allowed number of images per product has already reached the limit. Limit: 4");
+            throw new ProductImageLimitExceededException("The allowed number of images per product has already reached the limit. Limit: 4");
         if (this.images.isEmpty()) {
             this.images.add(image);
             setMainImage(image.getId());

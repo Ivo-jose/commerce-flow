@@ -1,6 +1,7 @@
 package br.com.ivogoncalves.catalog_service.domain.models;
 
 import br.com.ivogoncalves.catalog_service.domain.enums.ImageType;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.ProductImageLimitExceededException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -69,7 +70,11 @@ public class ProductImage {
     }
 
     private void validateOrder(Integer order) {
-        if (order == null || order < 0 || order > 3)
-            throw new IllegalArgumentException("The specified order cannot exceed the limit or be less than zero.");
+        if (order == null || order < 0) {
+            throw new IllegalArgumentException("Order must be a non-null positive integer.");
+        }
+        if (order > 3) {
+            throw new ProductImageLimitExceededException("The image order cannot exceed the maximum limit of 4.");
+        }
     }
 }

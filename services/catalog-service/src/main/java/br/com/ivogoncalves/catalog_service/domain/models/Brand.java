@@ -1,5 +1,7 @@
 package br.com.ivogoncalves.catalog_service.domain.models;
 
+import br.com.ivogoncalves.catalog_service.domain.exceptions.BrandAlreadyActiveException;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.BrandAlreadyInactiveException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -60,14 +62,14 @@ public class Brand {
 
     public void activate() {
         if (this.active)
-            throw new IllegalArgumentException("The brand is already active");
+            throw new BrandAlreadyActiveException("The brand is already active");
         this.active =  true;
         setUpdatedAt();
     }
 
      public void deactivate() {
         if (!this.active)
-            throw new IllegalArgumentException("The brand is already inactive.");
+            throw new BrandAlreadyInactiveException("The brand is already inactive.");
         this.active = false;
         setUpdatedAt();
     }

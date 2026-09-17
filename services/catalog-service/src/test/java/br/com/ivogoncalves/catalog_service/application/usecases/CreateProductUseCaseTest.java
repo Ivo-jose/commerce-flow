@@ -6,6 +6,8 @@ import br.com.ivogoncalves.catalog_service.application.ports.repositories.BrandR
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.CategoryRepository;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.ProductRepository;
 import br.com.ivogoncalves.catalog_service.domain.enums.DimensionUnit;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.InactiveBrandException;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.InactiveCategoryException;
 import br.com.ivogoncalves.catalog_service.domain.exceptions.ResourceNotFoundException;
 import br.com.ivogoncalves.catalog_service.domain.models.Brand;
 import br.com.ivogoncalves.catalog_service.domain.models.BrandId;
@@ -134,7 +136,7 @@ class CreateProductUseCaseTest {
     }
 
     @Test
-    @DisplayName("Should throw IllegalArgumentException when brand is inactive")
+    @DisplayName("Should throw InactiveBrandException when brand is inactive")
     void shouldThrowExceptionWhenBrandIsInactive() {
         // GIVEN
         when(brand.isActive()).thenReturn(false);
@@ -144,7 +146,7 @@ class CreateProductUseCaseTest {
 
         // WHEN / THEN
         assertThatThrownBy(() -> createProductUseCase.execute(productIn))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(InactiveBrandException.class)
                 .hasMessage("It is not permitted to create a product with an inactive brand.");
 
         verify(brandRepository).findById(new BrandId(brandId));
@@ -173,7 +175,7 @@ class CreateProductUseCaseTest {
     }
 
     @Test
-    @DisplayName("Should throw IllegalArgumentException when category is inactive")
+    @DisplayName("Should throw InactiveCategoryException when category is inactive")
     void shouldThrowExceptionWhenCategoryIsInactive() {
         // GIVEN
         when(brand.isActive()).thenReturn(true);
@@ -187,7 +189,7 @@ class CreateProductUseCaseTest {
 
         // WHEN / THEN
         assertThatThrownBy(() -> createProductUseCase.execute(productIn))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(InactiveCategoryException.class)
                 .hasMessage("It is not permitted to create a product with an inactive category.");
 
         verifyNoInteractions(productRepository);

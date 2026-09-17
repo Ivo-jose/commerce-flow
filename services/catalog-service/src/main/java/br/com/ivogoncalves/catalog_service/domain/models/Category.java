@@ -1,5 +1,8 @@
 package br.com.ivogoncalves.catalog_service.domain.models;
 
+import br.com.ivogoncalves.catalog_service.domain.exceptions.CategoryAlreadyActiveException;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.CategoryAlreadyInactiveException;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.InvalidCategoryHierarchyException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -50,14 +53,14 @@ public class Category {
 
     public void activate() {
         if (this.active)
-            throw new IllegalArgumentException("The category is already active.");
+            throw new CategoryAlreadyActiveException("The category is already active.");
         this.active = true;
         setUpdatedAt();
     }
 
     public void deactivate() {
         if (!this.active)
-            throw new IllegalArgumentException("The category is already inactive.");
+            throw new CategoryAlreadyInactiveException("The category is already inactive.");
         this.active = false;
         setUpdatedAt();
     }
@@ -72,7 +75,7 @@ public class Category {
 
     public void changeParent(CategoryId newParentCategoryId) {
         if (this.id.equals(newParentCategoryId))
-            throw new IllegalArgumentException("A category cannot be a parent of itself.");
+            throw new InvalidCategoryHierarchyException("A category cannot be a parent of itself.");
         this.parentCategoryId = newParentCategoryId;
         setUpdatedAt();
     }

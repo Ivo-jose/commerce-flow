@@ -5,6 +5,8 @@ import br.com.ivogoncalves.catalog_service.application.ports.output.ProductOut;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.BrandRepository;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.CategoryRepository;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.ProductRepository;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.InactiveBrandException;
+import br.com.ivogoncalves.catalog_service.domain.exceptions.InactiveCategoryException;
 import br.com.ivogoncalves.catalog_service.domain.exceptions.ResourceNotFoundException;
 import br.com.ivogoncalves.catalog_service.domain.models.BrandId;
 import br.com.ivogoncalves.catalog_service.domain.models.CategoryId;
@@ -31,13 +33,13 @@ public class CreateProductUseCase {
                 () -> new ResourceNotFoundException("There aren't brands for this id.")
         );
         if (!brand.isActive())
-            throw new IllegalArgumentException("It is not permitted to create a product with an inactive brand.");
+            throw new InactiveBrandException("It is not permitted to create a product with an inactive brand.");
 
         var category  = categoryRepository.findById(new CategoryId(productIn.categoryId())).orElseThrow(
                 () -> new ResourceNotFoundException("There aren't categories for this id.")
         );
         if (!category.isActive())
-            throw new IllegalArgumentException("It is not permitted to create a product with an inactive category.");
+            throw new InactiveCategoryException("It is not permitted to create a product with an inactive category.");
 
         var product = productRepository.save(productIn.toDomain());
         return ProductOut.from(product, brand.getName(), category.getName());
