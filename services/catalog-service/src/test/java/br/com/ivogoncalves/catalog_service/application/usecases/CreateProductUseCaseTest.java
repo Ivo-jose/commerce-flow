@@ -1,10 +1,11 @@
 package br.com.ivogoncalves.catalog_service.application.usecases;
 
-import br.com.ivogoncalves.catalog_service.application.ports.input.ProductIn;
-import br.com.ivogoncalves.catalog_service.application.ports.output.ProductOut;
+import br.com.ivogoncalves.catalog_service.application.ports.input.product.ProductIn;
+import br.com.ivogoncalves.catalog_service.application.ports.output.product.ProductOut;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.BrandRepository;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.CategoryRepository;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.ProductRepository;
+import br.com.ivogoncalves.catalog_service.application.usecases.product.CreateProductUseCase;
 import br.com.ivogoncalves.catalog_service.domain.enums.DimensionUnit;
 import br.com.ivogoncalves.catalog_service.domain.exceptions.InactiveBrandException;
 import br.com.ivogoncalves.catalog_service.domain.exceptions.InactiveCategoryException;

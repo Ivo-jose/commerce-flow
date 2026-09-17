@@ -1,4 +1,4 @@
-package br.com.ivogoncalves.catalog_service.application.ports.input;
+package br.com.ivogoncalves.catalog_service.application.ports.input.product;
 
 import br.com.ivogoncalves.catalog_service.domain.models.BrandId;
 import br.com.ivogoncalves.catalog_service.domain.models.CategoryId;

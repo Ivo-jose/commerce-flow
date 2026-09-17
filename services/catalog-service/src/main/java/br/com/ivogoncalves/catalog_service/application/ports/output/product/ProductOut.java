@@ -1,4 +1,4 @@
-package br.com.ivogoncalves.catalog_service.application.ports.output;
+package br.com.ivogoncalves.catalog_service.application.ports.output.product;
 
 import br.com.ivogoncalves.catalog_service.domain.models.Product;
 

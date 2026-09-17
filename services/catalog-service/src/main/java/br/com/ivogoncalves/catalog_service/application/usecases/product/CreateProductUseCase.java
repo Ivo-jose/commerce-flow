@@ -1,7 +1,7 @@
-package br.com.ivogoncalves.catalog_service.application.usecases;
+package br.com.ivogoncalves.catalog_service.application.usecases.product;
 
-import br.com.ivogoncalves.catalog_service.application.ports.input.ProductIn;
-import br.com.ivogoncalves.catalog_service.application.ports.output.ProductOut;
+import br.com.ivogoncalves.catalog_service.application.ports.input.product.ProductIn;
+import br.com.ivogoncalves.catalog_service.application.ports.output.product.ProductOut;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.BrandRepository;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.CategoryRepository;
 import br.com.ivogoncalves.catalog_service.application.ports.repositories.ProductRepository;
