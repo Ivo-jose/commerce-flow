@@ -1,10 +1,11 @@
 package br.com.ivogoncalves.catalog_service.application.ports.repositories;
 
-import br.com.ivogoncalves.catalog_service.domain.models.CategoryId;
+import br.com.ivogoncalves.catalog_service.application.ports.input.product.ProductFilter;
+import br.com.ivogoncalves.catalog_service.application.ports.input.product.ProductPageRequest;
 import br.com.ivogoncalves.catalog_service.domain.models.Product;
 import br.com.ivogoncalves.catalog_service.domain.models.ProductId;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,9 +13,7 @@ import java.util.Optional;
  */
 public interface ProductRepository {
 
-    List<Product> findAll();
-
-    List<Product> findAllByCategory(CategoryId categoryId);
+    Page<Product> findAllActive(ProductFilter productFilter, ProductPageRequest productPageRequest);
 
     Optional<Product> findById(ProductId productId);
 

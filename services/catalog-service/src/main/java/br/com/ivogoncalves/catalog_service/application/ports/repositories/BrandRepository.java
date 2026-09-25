@@ -5,13 +5,14 @@ import br.com.ivogoncalves.catalog_service.domain.models.BrandId;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Ivo Gonçalves
  */
 public interface BrandRepository {
 
-    List<Brand> findAll();
+    List<Brand> findAllByIds(Set<BrandId> brandIds);
 
     Optional<Brand> findById(BrandId brandId);
 
