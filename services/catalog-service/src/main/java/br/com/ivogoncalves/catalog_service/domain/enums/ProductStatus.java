@@ -17,8 +17,7 @@ public enum ProductStatus {
 
     ACTIVE(0, "active"),
     INACTIVE(1, "inactive"),
-    OUT_OF_STOCK(2, "out_of_stock"),
-    DISCONTINUED(3, "discontinued");
+    DISCONTINUED(2, "discontinued");
 
     private final int code;
     private final String description;
