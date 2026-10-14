@@ -38,7 +38,7 @@ public class ProductImage {
         validateUrl(url);
         validateOrder(order);
         this.id = new ProductImageId();
-        this.url = url;
+        this.url = url.trim();
         this.type = ImageType.GALLERY;
         this.order = order;
     }
@@ -48,15 +48,24 @@ public class ProductImage {
     }
 
      void switchToGallery() {
+        if (this.type == ImageType.GALLERY) {
+            throw new IllegalStateException("This image is already in the gallery.");
+        }
         this.type = ImageType.GALLERY;
     }
 
      void switchToMain() {
+        if (this.type == ImageType.MAIN) {
+            throw new IllegalStateException("This image is already the main.");
+        }
         this.type = ImageType.MAIN;
     }
 
      void updateOrder(Integer newOrder) {
         validateOrder(newOrder);
+         if (newOrder.equals(this.order)) {
+             throw new IllegalArgumentException("Updating the new order to be identical to the old order is not permitted.");
+         }
         this.order = newOrder;
     }
 
@@ -65,13 +74,22 @@ public class ProductImage {
     }
 
     private void validateUrl(String url) {
-        if (url == null || url.trim().isEmpty() || ! IMAGE_URL_PATTERN.matcher(url).matches())
+        if (url == null)
+            throw new IllegalArgumentException("The URL cannot be a null value.");
+
+        if (url.isBlank())
+            throw new IllegalArgumentException("The URL cannot be an empty value or whitespace.");
+
+        if (!IMAGE_URL_PATTERN.matcher(url).matches())
             throw new IllegalArgumentException("The URL provided is invalid.");
     }
 
     private void validateOrder(Integer order) {
-        if (order == null || order < 0) {
-            throw new IllegalArgumentException("Order must be a non-null positive integer.");
+        if (order == null) {
+            throw new IllegalArgumentException("Order must be a non-null.");
+        }
+        if (order < 0) {
+            throw new IllegalArgumentException("Order must be a positive number.");
         }
         if (order > 3) {
             throw new ProductImageLimitExceededException("The image order cannot exceed the maximum limit of 4.");
