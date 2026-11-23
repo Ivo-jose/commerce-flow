@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class InvalidSkuException extends RuntimeException {
-    public InvalidSkuException(String s) {
+    public InvalidSkuException(String message) {
+        super(message);
     }
 }
