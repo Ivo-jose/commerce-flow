@@ -3,6 +3,7 @@ package br.com.ivogoncalves.catalog_service.domain.models;
 import br.com.ivogoncalves.catalog_service.domain.enums.DimensionUnit;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author Ivo Gonçalves
@@ -25,6 +26,6 @@ public record Dimensions(BigDecimal length, BigDecimal width, BigDecimal height,
     }
 
     public BigDecimal calculateVolume() {
-        return length().multiply(height()).multiply(width());
+        return length().multiply(height()).multiply(width()).setScale(3, RoundingMode.HALF_UP);
     }
 }
