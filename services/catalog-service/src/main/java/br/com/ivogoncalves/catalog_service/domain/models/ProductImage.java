@@ -5,6 +5,7 @@ import br.com.ivogoncalves.catalog_service.domain.exceptions.ProductImageLimitEx
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 /**
@@ -43,8 +44,21 @@ public class ProductImage {
         this.order = order;
     }
 
+    private ProductImage(UUID id, String url, ImageType type, Integer order) {
+        validateUrl(url);
+        validateOrder(order);
+        this.id = new ProductImageId(id);
+        this.url = url.trim();
+        this.type = type;
+        this.order = order;
+    }
+
     public static ProductImage create(String url, Integer order) {
         return new ProductImage(url, order);
+    }
+
+    public static ProductImage reconstituite(UUID id, String url, ImageType type, Integer order) {
+        return new ProductImage(id, url, type,  order);
     }
 
      void switchToGallery() {
