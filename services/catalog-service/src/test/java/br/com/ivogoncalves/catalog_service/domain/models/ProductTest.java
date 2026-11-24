@@ -1433,7 +1433,7 @@ public class ProductTest {
 
 
         // Act
-        var product = Product.reconstitute(
+        var product = Product.reconstruction(
                 new ProductId(productEntity.getId()),
                 productEntity.getSku(),
                 productEntity.getName(),
@@ -1540,7 +1540,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         null,
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -1630,7 +1630,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         null,
                         productEntity.getName(),
@@ -1721,7 +1721,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         null,
@@ -1811,7 +1811,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -1901,7 +1901,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -1991,7 +1991,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2081,7 +2081,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2171,7 +2171,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2261,7 +2261,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2346,7 +2346,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2436,7 +2436,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2526,7 +2526,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2615,7 +2615,7 @@ public class ProductTest {
         );
 
         // Act
-        var product = Product.reconstitute(
+        var product = Product.reconstruction(
                 new ProductId(productEntity.getId()),
                 productEntity.getSku(),
                 productEntity.getName(),
@@ -2695,7 +2695,7 @@ public class ProductTest {
 
         // Act / Assert
        assertThatThrownBy(() ->
-               Product.reconstitute(
+               Product.reconstruction(
                        new ProductId(productEntity.getId()),
                        productEntity.getSku(),
                        productEntity.getName(),
@@ -2786,7 +2786,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2849,7 +2849,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -2945,7 +2945,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -3032,7 +3032,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
@@ -3124,7 +3124,7 @@ public class ProductTest {
 
         // Act / Assert
         assertThatThrownBy(() ->
-                Product.reconstitute(
+                Product.reconstruction(
                         new ProductId(productEntity.getId()),
                         productEntity.getSku(),
                         productEntity.getName(),
