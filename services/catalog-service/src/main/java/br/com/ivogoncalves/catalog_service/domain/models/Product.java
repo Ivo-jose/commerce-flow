@@ -142,7 +142,7 @@ public class Product {
         return new Product(name, description, basePrice, weight, dimensions, brandId, categoryId);
     }
 
-    public static Product reconstitute(
+    public static Product reconstruction(
             ProductId id,
             String sku,
             String name,
