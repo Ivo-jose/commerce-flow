@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.Instant;
-import java.util.Optional;
+import java.util.Objects;
 
 /**
  * @author Ivo Gonçalves
@@ -16,33 +16,56 @@ public class Brand {
 
     @Getter
     @EqualsAndHashCode.Include
-    private BrandId id;
+    private final BrandId id;
     @Getter
     private String name;
     @Getter
     private Slug slug;
     @Getter
-    private Optional<String> description;
+    private String description;
     @Getter
-    private Optional<String> logoUrl;
+    private String logoUrl;
     private boolean active;
     @Getter
     private final Instant createdAt;
     @Getter
     private Instant updatedAt;
 
-    private Brand(String name, Optional<String> description, Optional<String> logoUrl) {
+    private Brand(String name, String description, String logoUrl) {
         this.id = new BrandId();
         setName(name);
-        this.description = description;
-        this.logoUrl = logoUrl;
+        setDescription(description);
+        setLogoUrl(logoUrl);
         this.active = true;
         this.createdAt = Instant.now();
         this.updatedAt = null;
     }
 
-    public static Brand create(String name, Optional<String> description, Optional<String> logoUrl) {
+    private Brand(BrandId id, String name, String description, String logoUrl, Boolean active, Instant createdAt, Instant updatedAt) {
+        this.id = Objects.requireNonNull(id, "Id cannot be null.");
+        setName(name);
+        setDescription(description);
+        setLogoUrl(logoUrl);
+        this.active = active;
+        this.createdAt = Objects.requireNonNull(createdAt, "Create at cannot be null.");
+        this.updatedAt = updatedAt;
+    }
+
+    public static Brand create(String name, String description, String logoUrl) {
         return new Brand(name, description, logoUrl);
+    }
+
+    public static Brand reconstruction(
+            BrandId id,
+            String name,
+            String description,
+            String logoUrl,
+            Boolean active,
+            Instant createdAt,
+            Instant updatedAt
+    ) {
+        Objects.requireNonNull(active, "Active cannot be null.");
+        return new Brand(id, name, description, logoUrl, active, createdAt, updatedAt);
     }
 
     public void updateName(String newName) {
@@ -50,13 +73,21 @@ public class Brand {
         setUpdatedAt();
     }
 
-    public void updateDescription(Optional<String> newDescription) {
-        this.description = newDescription;
+    public void updateDescription(String newDescription) {
+        String normalized = newDescription == null || newDescription.isBlank() ? null : newDescription.trim();
+        if (Objects.equals(this.description, normalized)) {
+            throw new IllegalArgumentException("The Brand's new description can't be its current description.");
+        }
+        setDescription(normalized);
         setUpdatedAt();
     }
 
-    public void updateLogo(Optional<String> logoUrl) {
-        this.logoUrl = logoUrl;
+    public void updateLogo(String logoUrl) {
+        String normalized = logoUrl == null || logoUrl.isBlank() ? null : logoUrl.trim();
+        if (Objects.equals(this.logoUrl, normalized)) {
+            throw new IllegalArgumentException("The Brand's new logo url can't be its current logo url.");
+        }
+        setLogoUrl(normalized);
         setUpdatedAt();
     }
 
@@ -79,10 +110,26 @@ public class Brand {
     }
 
     private void setName(String name) {
-        if (name == null || name.isBlank())
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name required!");
-        this.name = name.trim();
+        }
+
+        String normalizedName = name.trim();
+
+        if (Objects.equals(this.name, normalizedName)) {
+            throw new IllegalArgumentException("The Brand's new name can't be its current name.");
+        }
+
+        this.name = normalizedName;
         this.slug = Slug.create(this.name);
+    }
+
+    private void setDescription(String description) {
+        this.description =  description ==  null || description.isBlank() ? null : description.trim();
+    }
+
+    private void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl == null || logoUrl.isBlank() ? null : logoUrl.trim();
     }
 
     private void setUpdatedAt() {
