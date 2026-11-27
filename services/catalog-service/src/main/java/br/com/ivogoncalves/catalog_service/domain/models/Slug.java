@@ -1,6 +1,7 @@
 package br.com.ivogoncalves.catalog_service.domain.models;
 
 import java.text.Normalizer;
+import java.util.Locale;
 
 /**
  * @author Ivo Gonçalves
@@ -17,7 +18,7 @@ public record Slug(String value) {
             throw new IllegalArgumentException("Text for slug generation is required.");
         String normalized = Normalizer.normalize(value, Normalizer.Form.NFD)
                 .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-                .toLowerCase()
+                .toLowerCase(Locale.ROOT)
                 .replaceAll("[^a-z0-9\\s-]", "")
                 .trim()
                 .replaceAll("\\s+", "-")
